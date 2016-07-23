@@ -8,7 +8,8 @@
 
 Adafruit_7segment matrix = Adafruit_7segment();
 int buttonPin = 9;
-int counter = 0;
+int seconds = 0;
+int minutes = 0;
 
 void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
@@ -17,14 +18,23 @@ void setup() {
 
 void loop() {
   if (digitalRead(buttonPin) == LOW) {
-    matrix.print(counter);
+    matrix.drawColon(true);
+    matrix.writeDigitNum(4, seconds % 10);
+    matrix.writeDigitNum(3, seconds / 10);
+    matrix.writeDigitNum(1, minutes % 10);
+    matrix.writeDigitNum(0, minutes / 10);
     matrix.writeDisplay();
-    counter++;
+    seconds++;
+    if (seconds == 60) {
+      seconds = 0;
+      minutes++;
+    }
     delay(1000);
   } else {
     matrix.clear();
     matrix.writeDisplay();
-    counter = 0;
+    seconds = 0;
+    minutes = 0;
   }
 
 }
