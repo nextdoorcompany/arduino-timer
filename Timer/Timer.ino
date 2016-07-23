@@ -1,3 +1,7 @@
+/* 7 segment + to 5V, - to GND, D to A4, C to A5 
+ * switch D9 to GND
+ */
+
 #include <Wire.h>
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
