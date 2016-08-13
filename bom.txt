@@ -1,0 +1,5 @@
+(1) 5-pin terminal block #2139
+(1) proto screwshield #196
+(1) Arduino Uno R3 #50
+(1) 9VDC 1000mA power adapter #63
+(1) 1.2" 7-segment red #1270
