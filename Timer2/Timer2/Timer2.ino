@@ -12,13 +12,14 @@ byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
 };
 
-IPAddress ip(192, 168, 88, 53);
+IPAddress ip(192, 168, 10, 80);
 
 IPAddress myDns(1, 1, 1, 1);
 
 EthernetClient client;
 
-IPAddress server(64, 131, 82, 241);
+IPAddress server(192, 168, 10, 230);
+int port = 8080;
 
 void setup() {
   matrix.begin(0x70);
@@ -28,7 +29,7 @@ void setup() {
 
   // start the Ethernet connection using a fixed IP address and DNS server:
   Ethernet.begin(mac, ip, myDns);
-  //httpRequest();
+  httpRequest();
 }
 
 void loop() {
@@ -60,10 +61,9 @@ void httpRequest() {
   client.stop();
 
   // if there's a successful connection:
-  if (client.connect(server, 80)) {
-    // send the HTTP PUT request:
-    client.println("GET /latest.txt HTTP/1.1");
-    client.println("Host: www.arduino.cc");
+  if (client.connect(server, port)) {
+    client.println("POST /andon/HMF HTTP/1.1");
+    client.println("Host: 192.168.10.230:8080");
     client.println("User-Agent: arduino-ethernet");
     client.println("Connection: close");
     client.println();
