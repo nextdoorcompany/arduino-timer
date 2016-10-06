@@ -62,7 +62,7 @@ void httpRequest() {
 
   // if there's a successful connection:
   if (client.connect(server, port)) {
-    client.println("POST /andon/HMF HTTP/1.1");
+    client.println("POST http://192.168.10.230:8080/andon/HMF HTTP/1.1");
     client.println("Host: 192.168.10.230:8080");
     client.println("User-Agent: arduino-ethernet");
     client.println("Connection: close");
