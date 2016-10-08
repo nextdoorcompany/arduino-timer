@@ -22,6 +22,7 @@ IPAddress server(192, 168, 10, 230);
 int port = 8080;
 
 void setup() {
+  //Serial.begin(9600);
   matrix.begin(0x70);
 
   // give the ethernet module time to boot up:
@@ -33,6 +34,11 @@ void setup() {
 }
 
 void loop() {
+  //if (client.available()) {
+  //  char c = client.read();
+  //  Serial.write(c);
+  //}
+  
   writeLED(seconds, minutes);
   seconds++;
   if (seconds > 59) {
@@ -63,13 +69,14 @@ void httpRequest() {
   // if there's a successful connection:
   if (client.connect(server, port)) {
     client.println("POST http://192.168.10.230:8080/andon/HMF HTTP/1.1");
-    client.println("Host: 192.168.10.230:8080");
+    client.println("Host: http://192.168.10.230:8080");
+    client.println("Accept-Encoding: gzip, deflate");
     client.println("User-Agent: arduino-ethernet");
+    client.println("Accept: */*");
     client.println("Connection: close");
+    client.println("Content-Length: 0");
     client.println();
-
   }
-
 }
 
 
